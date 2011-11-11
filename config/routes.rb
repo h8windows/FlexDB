@@ -1,11 +1,13 @@
 Flexdb::Application.routes.draw do
   
-  root :to => "pages#home"
+  root :to => "markets#index"
   devise_for :users
 
   #get "pages/home"
 
   get "pages/help"
+  
+  resources :markets
 
 
 
