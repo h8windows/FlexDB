@@ -10,8 +10,8 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
-    when /the feature page for "([^\"]*)"/
-      feature_path(Feature.find_by_title!($1))
+    when /the market page for "([^\"]*)"/
+      market_path(Market.find_by_name!($1))
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

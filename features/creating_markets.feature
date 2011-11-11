@@ -9,3 +9,5 @@ Feature: Creating markets
     And I fill in "Name" with "Atlanta"
     And I press "Create Market"
     Then I should see "Market has been created."
+	And I should be on the market page for "Atlanta"
+	And I should see "Atlanta - Markets - FlexDB"
