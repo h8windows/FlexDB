@@ -28,6 +28,9 @@ group :test do
   gem 'webrat', '0.7.1'
   gem 'spork', '0.9.0.rc9'
   gem 'rspec-core', '2.7.1'
+  gem 'cucumber-rails', '1.2.0'
+  gem 'capybara'
+  gem 'database_cleaner'
 end
 
 # To use ActiveModel has_secure_password
