@@ -1,7 +1,13 @@
 Flexdb::Application.routes.draw do
-  get "pages/home"
+  
+  root :to => "pages#home"
+  devise_for :users
+
+  #get "pages/home"
 
   get "pages/help"
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
