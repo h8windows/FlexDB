@@ -1,5 +1,5 @@
 <%= form_for @market do |f| %>
-  <!%= render 'shared/error_messages', :object => f.object %>
+  <%= f.error_messages %>
   <div class="field">
 	<%= f.label :name %>
     <%= f.text_area :name %>

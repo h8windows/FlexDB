@@ -6,9 +6,13 @@ class MarketsController < ApplicationController
   
   def create
     @market = Market.new(params[:market])
-    @market.save
-    flash[:notice] = "Market has been created."
-    redirect_to @market
+    if @market.save
+      flash[:notice] = "Market has been created."
+      redirect_to @market
+    else
+      flash[:alert] = "Market has not been created."
+      render :action => "new"
+    end
   end
   
   def show
