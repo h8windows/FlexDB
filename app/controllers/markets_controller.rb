@@ -23,4 +23,15 @@ class MarketsController < ApplicationController
     @market = Market.find(params[:id])
   end
   
+  def edit
+    @market = Market.find(params[:id])
+  end
+  
+  def update
+    @market = Market.find(params[:id])
+    @market.update_attributes(params[:market])
+    flash[:notice] = "Market has been updated."
+    redirect_to @market
+  end
+  
 end
