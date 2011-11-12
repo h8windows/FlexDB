@@ -1,5 +1,7 @@
 class MarketsController < ApplicationController
   
+  before_filter :find_market, :only => [:show, :edit, :update, :destroy]
+  
   def index
     @markets = Market.all
   end
@@ -38,6 +40,14 @@ class MarketsController < ApplicationController
     @market = Market.find(params[:id])
     @market.destroy
     flash[:notice] = "Market has been deleted."
+    redirect_to markets_path
+  end
+  
+  private
+  def find_market
+    @market = Market.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "The market you were looking for could not be found."
     redirect_to markets_path
   end
   
