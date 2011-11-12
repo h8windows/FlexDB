@@ -6,4 +6,9 @@ module ApplicationHelper
       end
     end
   end
+  
+  def logo
+    image_tag("/assets/flex-logo2.png", :height => "100", :width => "100", :alt => "FlexDB App", :class => "round")
+  end
+  
 end
