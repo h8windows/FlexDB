@@ -34,4 +34,11 @@ class MarketsController < ApplicationController
     redirect_to @market
   end
   
+  def destroy
+    @market = Market.find(params[:id])
+    @market.destroy
+    flash[:notice] = "Market has been deleted."
+    redirect_to markets_path
+  end
+  
 end
