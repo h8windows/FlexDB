@@ -7,7 +7,9 @@ Flexdb::Application.routes.draw do
 
   get "pages/help"
   
-  resources :markets
+  resources :markets do
+    resources :features
+  end
 
   devise_for :users
 

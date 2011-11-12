@@ -10,7 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111111213311) do
+ActiveRecord::Schema.define(:version => 20111112205151) do
+
+  create_table "features", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "market_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "features", ["market_id"], :name => "index_features_on_market_id"
 
   create_table "markets", :force => true do |t|
     t.string   "name"
