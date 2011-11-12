@@ -1,1 +1,21 @@
-<%= link_to "New Market", new_market_path %>
+<h1>All Markets</h1>
+
+<table>
+  <tr>
+    <th>Market</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @markets.each do |market| %>
+  <tr>
+	<td><%= link_to market.name, market %></td>
+    
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Market', new_market_path %>

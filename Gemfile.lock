@@ -71,6 +71,8 @@ GEM
     erubis (2.7.0)
     execjs (1.2.9)
       multi_json (~> 1.0)
+    factory_girl (2.2.0)
+      activesupport
     ffi (1.0.9)
     gherkin (2.6.2)
       json (>= 1.4.6)
@@ -179,6 +181,7 @@ DEPENDENCIES
   devise (~> 1.4.3)
   dynamic_form
   email_spec
+  factory_girl
   jquery-rails
   json
   mysql2

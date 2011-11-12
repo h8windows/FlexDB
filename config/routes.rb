@@ -1,7 +1,7 @@
 Flexdb::Application.routes.draw do
   
   root :to => "markets#index"
-  devise_for :users
+  
 
   #get "pages/home"
 
@@ -9,7 +9,7 @@ Flexdb::Application.routes.draw do
   
   resources :markets
 
-
+  devise_for :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
