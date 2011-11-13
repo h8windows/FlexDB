@@ -22,6 +22,20 @@ class FeaturesController < ApplicationController
     
   end
   
+  def edit
+    
+  end
+  
+  def update
+    if @feature.update_attributes(params[:feature])
+      flash[:notice] = "Feature has been updated."
+      redirect_to [@market, @feature]
+    else
+      flash[:alert] = "Feature has not been updated."
+      render :action => "edit"
+    end
+  end
+  
   private
     def find_market
       @market = Market.find(params[:market_id])
