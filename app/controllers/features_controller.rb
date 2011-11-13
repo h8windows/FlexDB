@@ -36,6 +36,12 @@ class FeaturesController < ApplicationController
     end
   end
   
+  def destroy
+    @feature.destroy
+    flash[:notice] = "Feature has been deleted."
+    redirect_to @market
+  end
+  
   private
     def find_market
       @market = Market.find(params[:market_id])
