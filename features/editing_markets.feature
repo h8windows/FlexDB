@@ -1,10 +1,14 @@
 Feature: Editing markets
 	In order to change market names
-	As a user
+	As an admin
 	I want to be able to do that through an interface
 	
 	Scenario: Editing markets
-		Given there is a market called "Atlanta"
+		Given there are the following users:
+		| email                    | password | admin |
+		| admin@example.com        | password | true  |
+		And I am signed in as "admin@example.com"
+		And there is a market called "Atlanta"
 		And I am on the homepage
 		When I follow "Atlanta"
 		And I follow "Edit Market"

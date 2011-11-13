@@ -1,5 +1,6 @@
 class FeaturesController < ApplicationController
   
+  before_filter :authenticate_user!, :except => [:index, :show]
   before_filter :find_market
   before_filter :find_feature, :only => [:show, :edit, :update, :destroy]
   
@@ -8,7 +9,7 @@ class FeaturesController < ApplicationController
   end
   
   def create
-    @feature = @market.features.build(params[:feature])
+    @feature = @market.features.build(params[:feature].merge!(:user => current_user))
     if @feature.save
       flash[:notice] = "Feature article has been created."
       redirect_to [@market, @feature]

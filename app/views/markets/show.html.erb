@@ -3,12 +3,14 @@
 <ul id="features">
 	<% @market.features.each do |feature| %>
 		<li>
-			#<%= feature.id %> - <%= link_to feature.title , [@market, feature] %>
+			<%= link_to feature.title , [@market, feature] %> <small>Author: <%= feature.user.name %></small>
 		</li>
 	<% end %>
 </ul>
 <%= link_to "New Feature Article", new_market_feature_path(@market) %>
 <br />
+<%= admins_only do %>
 <%= link_to "Edit Market", edit_market_path(@market) %>
 <br />
 <%= link_to "Delete Market", @market, :method => :delete, :confirm => "Are you sure you want to delete this market?" %>
+<% end %>

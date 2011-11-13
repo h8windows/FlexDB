@@ -4,8 +4,11 @@ Feature: Viewing feature articles
 	I want to see them on that market's page
 	
 	Background:
+		Given there are the following users:
+			| email              | password |
+			| user@example.com   | password |
 		Given there is a market called "Atlanta"
-		And that market has a feature:
+		And "user@example.com" has created a feature for this market:
 			| title                 | content                       |
 			| Dining Alfresco       | Patios with pizzaz            |
 		And I am on the homepage
