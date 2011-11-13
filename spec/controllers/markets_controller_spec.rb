@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe MarketsController do
-  let(:user) do
-    user = Factory(:user)
-    user
+  let(:user) { create_user! }
   end
   
   let(:market) { Factory(:market) }
