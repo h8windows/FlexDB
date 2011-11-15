@@ -17,3 +17,8 @@ Scenario: Deleting a user
 	And I follow "Bob"
 	When I follow "Delete User"
 	Then I should see "User has been deleted."
+	
+Scenario: Users cannot delete themselves
+	When I follow "Joe"
+	And I follow "Delete User"
+	Then I should see "You cannot delete yourself!"
