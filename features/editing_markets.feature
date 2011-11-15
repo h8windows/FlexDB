@@ -7,7 +7,7 @@ Feature: Editing markets
 		Given there are the following users:
 		| email                    | password | admin |
 		| admin@example.com        | password | true  |
-		And I am signed in as "admin@example.com"
+		And I am signed in as them
 		And there is a market called "Atlanta"
 		And I am on the homepage
 		When I follow "Atlanta"

@@ -7,10 +7,17 @@ Feature: Viewing feature articles
 		Given there are the following users:
 			| email              | password |
 			| user@example.com   | password |
-		Given there is a market called "Atlanta"
+		And there is a market called "Atlanta"
+		And "user@example.com" can view the "Atlanta" market
+		And I am signed in as them
 		And "user@example.com" has created a feature for this market:
 			| title                 | content                       |
 			| Dining Alfresco       | Patios with pizzaz            |
+		And there is a market called "Boston"
+		And "user@example.com" can view the "Boston" market
+		And "user@example.com" has created a feature for this market:
+			| title                 | content                       |
+			| Shopping with Bags    | Big bags hold more stuff      |
 		And I am on the homepage
 		
 	Scenario: Viewing feature for a given market
@@ -24,7 +31,7 @@ Feature: Viewing feature articles
 		When I follow "FlexDB"
 		And I follow "Boston"
 		Then I should see "Shopping with Bags"
-		And I should not see "dining Alfresco"
+		And I should not see "Dining Alfresco"
 		When I follow "Shopping with Bags"
 		Then I should see "Shopping with Bags" within "#feature h2"
 		And I should see "Big bags hold more stuff"

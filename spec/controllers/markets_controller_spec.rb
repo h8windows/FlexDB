@@ -2,12 +2,17 @@ require 'spec_helper'
 
 describe MarketsController do
   let(:user) { create_user! }
-  end
   
   let(:market) { Factory(:market) }
   
   context "standard users" do
-
+    
+    it "cannot access the show action" do
+      sign_in(:user, user)
+      get :show, :id => market.id
+      response.should redirect_to(markets_path)
+      flash[:alert].should eql("The market you were looking for could not be found.")
+    end
 
     { "new" => "get",
       "create" => "post",

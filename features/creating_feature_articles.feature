@@ -8,13 +8,11 @@ Feature: Creating feature articles
 		And there are the following users:
 		| email            | password      | name     |
 		| user@example.com | password      | BillyBob |
+		And "user@example.com" can view the "Atlanta" market
+		And I am signed in as them
 		And I am on the homepage
 		When I follow "Atlanta"
 		And I follow "New Feature Article"
-		Then I should see "You need to sign in or sign up before continuing."
-		When I fill in "Email" with "user@example.com"
-		And I fill in "Password" with "password"
-		And I press "Sign in"
 		
 	Scenario: Creating a feature article
 		When I fill in "Title" with "Dining Alfresco"

@@ -2,6 +2,7 @@ class MarketsController < ApplicationController
   
   
   before_filter :authorize_admin!, :except => [:index, :show]
+  before_filter :authenticate_user!, :only => [:show]
   before_filter :find_market, :only => [:show, :edit, :update, :destroy]
   
   def index
@@ -47,7 +48,11 @@ class MarketsController < ApplicationController
   
   private
   def find_market
-    @market = Market.find(params[:id])
+    @market = if current_user.admin
+      Market.find(params[:id])
+    else
+      Market.readable_by(current_user).find(params[:id])
+    end
     rescue ActiveRecord::RecordNotFound
     flash[:alert] = "The market you were looking for could not be found."
     redirect_to markets_path

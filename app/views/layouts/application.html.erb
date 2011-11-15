@@ -30,6 +30,10 @@
 				<br />
 				<%= link_to "Sign in", new_user_session_path %>
 			<% end %>
+			<%= admins_only do %>
+			<br />
+			<%= link_to "Admin", admin_root_path %>
+			<% end %>
 		</nav>
 	</div>
 </body>
