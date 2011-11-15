@@ -7,9 +7,10 @@ Feature: Editing feature articles
 		Given there are the following users:
 			| email              | password |
 			| user@example.com   | password |
+		And I am signed in as them
 		And there is a market called "Atlanta"
 		And "user@example.com" can view the "Atlanta" market
-		And I am signed in as them
+		And "user@example.com" can edit features in the "Atlanta" market
 		And "user@example.com" has created a feature for this market:
 			| title                 | content                       |
 			| Dining Alfresco       | Patios with pizzaz            |

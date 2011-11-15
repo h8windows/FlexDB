@@ -9,6 +9,7 @@ Feature: Creating feature articles
 		| email            | password      | name     |
 		| user@example.com | password      | BillyBob |
 		And "user@example.com" can view the "Atlanta" market
+		And "user@example.com" can create features in the "Atlanta" market
 		And I am signed in as them
 		And I am on the homepage
 		When I follow "Atlanta"

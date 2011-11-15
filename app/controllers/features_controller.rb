@@ -1,8 +1,10 @@
 class FeaturesController < ApplicationController
   
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!
   before_filter :find_market
   before_filter :find_feature, :only => [:show, :edit, :update, :destroy]
+  before_filter :authorize_create!, :only => [:new, :create]
+  before_filter :authorize_update!, :only => [:edit, :update]
   
   def new
     @feature = @market.features.build
@@ -45,11 +47,28 @@ class FeaturesController < ApplicationController
   
   private
     def find_market
-      @market = Market.find(params[:market_id])
+      @market = Market.for(current_user).find(params[:market_id])
+      rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "The market you were looking for could not be found."
+      redirect_to root_path
     end
     
     def find_feature
       @feature = @market.features.find(params[:id])
+    end
+    
+    def authorize_create!
+      if !current_user.admin? && cannot?("create features".to_sym, @market)
+        flash[:alert] = "You cannot create features on this market."
+        redirect_to @market
+      end
+    end
+    
+    def authorize_update!
+      if !current_user.admin? && cannot?(:"edit features", @market)
+        flash[:alert] = "You cannot modify features on this market."
+        redirect_to @market
+      end
     end
     
 end
