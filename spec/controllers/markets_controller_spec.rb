@@ -28,7 +28,7 @@ describe MarketsController do
     end
   end
 
-  it "displays an error for a missing project" do
+  it "displays an error for a missing market" do
     sign_in(:user, user)
     get :show, :id => "not-here"
     response.should redirect_to(markets_path)

@@ -48,10 +48,10 @@ class MarketsController < ApplicationController
   
   private
   def find_market
-    @market = if current_user.admin
+    @market = if current_user.admin?
       Market.find(params[:id])
     else
-      Market.readable_by(current_user).find(params[:id])
+      @market = Market.readable_by(current_user).find(params[:id])
     end
     rescue ActiveRecord::RecordNotFound
     flash[:alert] = "The market you were looking for could not be found."

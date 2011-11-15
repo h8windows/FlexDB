@@ -5,7 +5,7 @@ Given /^that market has a feature:$/ do |table|
   end
 end
 
-Given /^"([^\"]*)" has created a feature for this project:$/ do |email, table|
+Given /^"([^\"]*)" has created a feature for this market:$/ do |email, table|
   table.hashes.each do |attributes|
     attributes = attributes.merge!(:user => User.find_by_email!(email))
     @market.features.create!(attributes)
