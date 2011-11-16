@@ -3,6 +3,8 @@
 	<small>Author: <%= @feature.user.name %></small>
 	<%= simple_format(@feature.content) %>
 </div>
-<%= link_to "Edit Feature Article", [:edit, @market, @feature] %>
+<%= authorized?("edit features", @market) do %>
+	<%= link_to "Edit Feature Article", [:edit, @market, @feature] %>
+<% end %>
 <br />
 <%= link_to "Delete Feature Article", [@market, @feature], :method => :delete, :confirm => "Are you sure you want to delete this feature?" %>

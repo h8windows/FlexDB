@@ -7,7 +7,9 @@
 		</li>
 	<% end %>
 </ul>
-<%= link_to "New Feature Article", new_market_feature_path(@market) %>
+<%= authorized?("create features".to_sym, @market) do %>
+	<%= link_to "New Feature Article", new_market_feature_path(@market) %>
+<% end %>
 <br />
 <%= admins_only do %>
 <%= link_to "Edit Market", edit_market_path(@market) %>
