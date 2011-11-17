@@ -151,3 +151,12 @@ td.sidebar {
   vertical-align: top;
   background: #ffc;
 }
+
+.admin ul li {
+	text-decoration: none;
+	list-style-type: none;
+}
+
+.user-info {
+	float: right;
+}

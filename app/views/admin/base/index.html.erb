@@ -1,4 +1,11 @@
 
 Welcome to the FlexDB Admin Lounge. Please enjoy your stay.
 <br />
-<%= link_to "Users", admin_users_path %>
+<hr>
+<div class="admin">
+	<ul>
+		<li><%= link_to "Edit Users", admin_users_path %></li>
+		<li><%= link_to "New User", new_admin_user_path %></li>
+		<li><%= link_to 'New Market', new_market_path %></li>
+	</ul>
+</div>

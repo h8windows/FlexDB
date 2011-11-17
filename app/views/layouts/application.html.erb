@@ -22,21 +22,11 @@
 			</div>
 		<% end %>
 		<%= yield %>
-		<nav>
+		<div class="user-info">
 			<% if user_signed_in? %>
 				Signed in as <%= current_user.email %>
-				<br />
-				<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-			<% else %>
-				<!%= link_to "Sign up", new_user_registration_path %>
-				<br />
-				<%= link_to "Sign in", new_user_session_path %>
 			<% end %>
-			<%= admins_only do %>
-			<br />
-			<%= link_to "Admin", admin_root_path %>
-			<% end %>
-		</nav>
+		</div>
 	</div>
 	<!-- migrated stack installed taps -->
 </body>
