@@ -1,5 +1,5 @@
 <%= form_for [@market, @feature] do |f| %>
-  <%= f.error_messages %>
+  <% if @post.errors.any? %>
   <div class="field">
 	<%= f.label :title %>
     <%= f.text_field :title %>
