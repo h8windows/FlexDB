@@ -1,5 +1,12 @@
 <%= form_for [@market, @feature] do |f| %>
-  <% if @post.errors.any? %>
+  <% if @post.errors.any? %><% if @address.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this feature from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
   <div class="field">
 	<%= f.label :title %>
     <%= f.text_field :title %>
