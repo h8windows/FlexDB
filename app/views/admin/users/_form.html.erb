@@ -1,26 +1,32 @@
 <%= form_for [:admin, @user] do |f| %>
-	<% if @post.errors.any? %><% if @address.errors.any? %>
+	<% if @user.errors.any? %>
 	    <div id="error_explanation">
-	      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this feature from being saved:</h2>
+	      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
 	      <ul>
-	      <% @post.errors.full_messages.each do |msg| %>
+	      <% @user.errors.full_messages.each do |msg| %>
 	        <li><%= msg %></li>
 	      <% end %>
-	<p>
-		<%= f.label :name %>
-		<%= f.text_field :name %>
-	</p>
-	<p>
-		<%= f.label :email %>
-		<%= f.text_field :email %>
-	</p>
-	<p>
-		<%= f.label :password %>
-		<%= f.password_field :password %>
-	</p>
-	<p>
-		<%= f.check_box :admin %>
-		<%= f.label :admin, "Is an admin?" %>
-	</p>
-	<%= f.submit %>
+	      </ul>
+	    </div>
+	  <% end %>
+		<p>
+			<%= f.label :name %>
+			<%= f.text_field :name %>
+		</p>
+		<p>
+			<%= f.label :email %>
+			<%= f.text_field :email %>
+		</p>
+		<p>
+			<%= f.label :password %>
+			<%= f.password_field :password %>
+		</p>
+		<p>
+			<%= f.check_box :admin %>
+			<%= f.label :admin, "Is an admin?" %>
+		</p>
+	  <div class="actions">
+	    <%= f.submit %>
+	  </div>
+	<% end %>

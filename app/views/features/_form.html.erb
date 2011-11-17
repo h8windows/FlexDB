@@ -1,20 +1,24 @@
 <%= form_for [@market, @feature] do |f| %>
-  <% if @post.errors.any? %><% if @address.errors.any? %>
+  <% if @feature.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this feature from being saved:</h2>
+      <h2><%= pluralize(@feature.errors.count, "error") %> prohibited this feature from being saved:</h2>
 
       <ul>
-      <% @post.errors.full_messages.each do |msg| %>
+      <% @feature.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
-  <div class="field">
-	<%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-<div class="field">
-	<%= f.label :content %>
-    <%= f.text_area :content %>
-  </div>
+      </ul>
+    </div>
+  <% end %>
+	<div class="field">
+		<%= f.label :title %>
+	    <%= f.text_field :title %>
+	  </div>
+	<div class="field">
+		<%= f.label :content %>
+	    <%= f.text_area :content %>
+	  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+<% end %>
