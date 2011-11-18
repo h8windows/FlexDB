@@ -18,9 +18,13 @@ describe "/api/v1/markets", :type => :api do
       last_response.body.should eql(markets_json)
       last_response.status.should eql(200)
       
-      markets = last_response.body
-      Rails.logger = Logger.new(STDOUT)
-      Rails.logger = markets
+      markets = JSON.parse(last_response.body)
+      puts last_response.body
+      puts markets
+      
+      markets.any? do |m|
+        m["name"] == "Atlanta"
+      end.should be_true
     end
   end
   
