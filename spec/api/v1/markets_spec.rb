@@ -38,6 +38,11 @@ describe "/api/v1/markets", :type => :api do
   end
   
   context "creating a market" do
+    before do
+      user.admin = true
+      user.save
+    end
+    
     let(:url) { "/api/v1/markets" }
     
     it "successful JSON" do
