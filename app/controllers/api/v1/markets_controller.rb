@@ -15,5 +15,10 @@ class Api::V1::MarketsController < Api::V1::BaseController
     end
   end
   
+  def show
+    @market = Market.find(params[:id])
+    respond_with(@market, :methods => "last_feature")
+  end
+  
   
 end

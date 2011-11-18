@@ -16,13 +16,17 @@ describe "/api/v1/markets", :type => :api do
     end
     
     let(:url) { "/api/v1/markets" }
-    it "json" do
+    it "JSON" do
       get "#{url}.json", :token => token
       markets_json = Market.for(user).all.to_json
       last_response.body.should eql(markets_json)
       last_response.status.should eql(200)
       
       markets = JSON.parse(last_response.body)
+      
+      markets.any? do |m|
+        m["name"] == "Atlanta"
+      end.should be_true
       
       markets.any? do |m|
         m["name"] == "Access Denied"
@@ -35,6 +39,25 @@ describe "/api/v1/markets", :type => :api do
       markets = Nokogiri::XML(last_response.body)
       markets.css("market name").text.should eql("Atlanta")
     end
+    
+    context "show" do
+      let(:url) { "/api/v1/markets/#{@market.id}" }
+      before do
+        Factory(:feature, :market => @market)
+      end
+      
+      it "JSON" do
+        get "#{url}.json", :token => token
+        market = @market.to_json(:methods => "last_feature")
+        last_response.body.should eql(market)
+        last_response.status.should eql(200)
+        
+        market_response = JSON.parse(last_response.body)
+        feature_title = market_response["last_feature"]["title"]
+        feature_title.should_not be_blank
+      end
+    end
+    
   end
   
   context "creating a market" do

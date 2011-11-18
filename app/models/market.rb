@@ -11,4 +11,8 @@ class Market < ActiveRecord::Base
     user.admin? ? Market : Market.readable_by(user)
   end
   
+  def last_feature
+    features.last
+  end
+  
 end
