@@ -23,12 +23,31 @@ describe "/api/v1/markets", :type => :api do
       last_response.status.should eql(200)
       
       markets = JSON.parse(last_response.body)
-      puts last_response.body
-      puts markets
       
       markets.any? do |m|
         m["name"] == "Access Denied"
       end.should be_false
+    end
+    
+    it "XML" do
+      get "#{url}.xml", :token => token
+      last_response.body.should eql(Market.readable_by(user).to_xml)
+      markets = Nokogiri::XML(last_response.body)
+      markets.css("market name").text.should eql("Atlanta")
+    end
+  end
+  
+  context "creating a market" do
+    let(:url) { "/api/v1/markets" }
+    
+    it "successful JSON" do
+      post "#{url}.json", :token => token, :market => { :name => "Boston" }
+      market = Market.find_by_name("Boston")
+      route = "/api/v1/markets/#{market.id}"
+      
+      last_response.status.should eql(201)
+      last_response.headers["Location"].should eql(route)
+      last_response.body.should eql(market.to_json)
     end
   end
   
