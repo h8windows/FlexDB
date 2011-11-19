@@ -9,7 +9,7 @@ class Api::V1::FeaturesController < Api::V1::BaseController
   
   def create
     feature = @market.features.create(params[:feature])
-    if feature.valid?
+    if feature.save
       respond_with(feature, :location => api_v1_market_path(feature))
     else
       respond_with(feature)
