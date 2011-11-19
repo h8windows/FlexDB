@@ -31,4 +31,17 @@ describe "/api/v1/features", :type => :api do
     end
   end
   
+  context "create" do
+    let(:url) { "/api/v1/markets/#{market.id}/features" }
+    it "successful JSON" do
+      post "#{url}.json", :token => token, :feature => { :title => "Boston", :content => "This is the article" }
+      feature = Feature.find_by_title("Boston")
+      route = "/api/v1/markets/#{feature.id}"
+      puts last_response.headers["Location"]
+      last_response.status.should eql(201)
+      last_response.headers["Location"].should eql(route)
+      last_response.body.should eql(feature.to_json)
+    end
+  end
+  
 end

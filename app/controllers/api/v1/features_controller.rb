@@ -6,6 +6,15 @@ class Api::V1::FeaturesController < Api::V1::BaseController
     respond_with(@market.features)
   end
   
+  def create
+    feature = @market.features.create(params[:feature])
+    if feature.valid?
+      respond_with(feature, :location => api_v1_market_path(feature))
+    else
+      respond_with(feature)
+    end
+  end
+  
   private
     def find_market
     @market = Market.for(current_user).find(params[:market_id])
