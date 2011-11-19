@@ -1,7 +1,7 @@
 class Api::V1::MarketsController < Api::V1::BaseController
   
   before_filter :authorize_admin!, :except => [:index, :show]
-  before_filter :find_market, :only => [:show]
+  before_filter :find_market, :only => [:show, :update]
   
   def index
     respond_with(Market.for(current_user))
@@ -19,6 +19,11 @@ class Api::V1::MarketsController < Api::V1::BaseController
   def show
     #@market = Market.find(params[:id])
     respond_with(@market, :methods => "last_feature")
+  end
+  
+  def update
+    @market.update_attributes(params[:market])
+    respond_with(@market)
   end
   
   private

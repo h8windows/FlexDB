@@ -79,4 +79,34 @@ describe "/api/v1/markets", :type => :api do
     end
   end
   
+  context "updating a market" do
+    before do
+      user.admin = true
+      user.save
+    end
+    
+    let(:url) { "/api/v1/markets/#{@market.id}" }
+    it "successful JSON" do
+      @market.name.should eql("Atlanta")
+      put "#{url}.json", :token => token, :market => { :name => "Boston" }
+      last_response.status.should eql(200)
+      
+      @market.reload
+      @market.name.should eql("Boston")
+      last_response.body.should eql("{}")
+    end
+    
+    it "unsuccessful JSON" do
+      @market.name.should eql("Atlanta")
+      put "#{url}.json", :token => token, :market => { :name => "" }
+      last_response.status.should eql(422)
+      
+      @market.reload
+      @market.name.should eql("Atlanta")
+      errors = { :name => ["can't be blank"] }
+      last_response.body.should eql(errors.to_json)
+    end
+    
+  end
+  
 end
