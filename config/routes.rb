@@ -2,7 +2,9 @@ Flexdb::Application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      resources :markets
+      resources :markets do
+        resources :features
+      end
     end
   end
 
