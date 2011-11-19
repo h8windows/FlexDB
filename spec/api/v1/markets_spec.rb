@@ -48,12 +48,12 @@ describe "/api/v1/markets", :type => :api do
       
       it "JSON" do
         get "#{url}.json", :token => token
-        market = @market.to_json(:methods => "last_feature")
+        market = @market.to_json(:methods => "feature")
         last_response.body.should eql(market)
         last_response.status.should eql(200)
         
         market_response = JSON.parse(last_response.body)
-        feature_title = market_response["last_feature"]["title"]
+        feature_title = market_response["feature"][0]["title"]
         feature_title.should_not be_blank
       end
     end

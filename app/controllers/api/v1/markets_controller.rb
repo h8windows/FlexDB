@@ -18,7 +18,7 @@ class Api::V1::MarketsController < Api::V1::BaseController
   
   def show
     #@market = Market.find(params[:id])
-    respond_with(@market, :methods => "last_feature")
+    respond_with(@market, :methods => "feature")
   end
   
   def update

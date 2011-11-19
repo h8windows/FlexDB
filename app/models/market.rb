@@ -15,4 +15,8 @@ class Market < ActiveRecord::Base
     features.last
   end
   
+  def feature
+    features.all
+  end
+  
 end
