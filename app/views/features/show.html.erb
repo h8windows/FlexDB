@@ -1,6 +1,6 @@
 <div id="feature">
 	<h2><%= @feature.title %></h2>
-	<small>Author: <!%= @feature.user.name %></small>
+	<small>Author: <%= @feature.user.name %></small>
 	<%= simple_format(@feature.content) %>
 </div>
 <%= authorized?("edit features", @market) do %>

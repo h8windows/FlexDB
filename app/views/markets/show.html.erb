@@ -3,7 +3,7 @@
 <ul id="features">
 	<% @market.features.each do |feature| %>
 		<li>
-			<%= link_to feature.title , [@market, feature] %> <small>Author: <!%= feature.user.name %></small>
+			<%= link_to feature.title , [@market, feature] %> <small>Author: <%= feature.user.name %></small>
 		</li>
 	<% end %>
 </ul>
