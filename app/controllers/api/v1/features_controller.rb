@@ -10,7 +10,6 @@ class Api::V1::FeaturesController < Api::V1::BaseController
   def create
     feature = @market.features.create(params[:feature])
       respond_with(feature, :location => api_v1_market_path(feature))
-    end
   end
   
   def update
