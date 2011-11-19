@@ -23,8 +23,8 @@
 			<%= f.password_field :password %>
 		</p>
 		<p>
-			<%= f.label :authentication_token, "API Key" %>
-			<%= f.text_field :authentication_token %>
+			<%= f.label :authentication_token, "API Key: " %>
+			<%= @user.authentication_token %>
 		</p>
 		<p>
 			<%= f.check_box :admin %>
