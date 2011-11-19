@@ -7,6 +7,7 @@ describe "/api/v1/features", :type => :api do
     @user = create_user!
     @user.update_attribute(:admin, true)
     @user.permissions.create!(:action => "view", :thing => market)
+    @feature = Factory(:feature)
   end
   
   let(:token) { @user.authentication_token }
@@ -34,14 +35,30 @@ describe "/api/v1/features", :type => :api do
   context "create" do
     let(:url) { "/api/v1/markets/#{market.id}/features" }
     it "successful JSON" do
-      post "#{url}.json", :token => token, :feature => { :title => "Boston", :content => "This is the article" }
-      feature = Feature.find_by_title("Boston")
+      post "#{url}.json", :token => token, :feature => { :title => "New Feature Article", :content => "This is the article" }
+      feature = Feature.find_by_title("New Feature Article")
       route = "/api/v1/markets/#{feature.id}"
-      puts last_response.headers["Location"]
       last_response.status.should eql(201)
       last_response.headers["Location"].should eql(route)
       last_response.body.should eql(feature.to_json)
     end
   end
+  
+  context "update" do
+    
+    let(:url) { "/api/v1/markets/#{market.id}/features/#{@feature.id}" }
+    it "successful JSON via api" do
+      @feature.title.should eql("A feature")
+      put "#{url}.json", :token => token, :feature => { :title => "New Feature Article", :content => "This is the article" }
+      puts last_response.status
+      last_response.status.should eql(200)
+      @feature.reload
+      #        @feature.title.should eql("New Feature Article")
+      last_response.body.should eql("{}")
+    end
+  end
+
+
+  
   
 end

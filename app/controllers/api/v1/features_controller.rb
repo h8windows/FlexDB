@@ -1,6 +1,7 @@
 class Api::V1::FeaturesController < Api::V1::BaseController
   
   before_filter :find_market
+  #before_filter :find_feature, :only => [:update]
   
   def index
     respond_with(@market.features)
@@ -15,12 +16,21 @@ class Api::V1::FeaturesController < Api::V1::BaseController
     end
   end
   
+  def update
+    #@feature.update_attributes(params[:feature])
+    respond_with(@feature)
+  end
+  
   private
     def find_market
     @market = Market.for(current_user).find(params[:market_id])
     rescue ActiveRecord::RecordNotFound
       error = { :error => "The market you were looking for could not be found." }
       respond_with(error, :status => 404)
+    end
+    
+    def find_feature
+      @feature = @market.features.find(params[:id])
     end 
     
 end
