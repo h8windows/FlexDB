@@ -1,6 +1,7 @@
 class Api::V1::MarketsController < Api::V1::BaseController
   
   before_filter :authorize_admin!, :except => [:index, :show]
+  before_filter :find_market, :only => [:show]
   
   def index
     respond_with(Market.for(current_user))
@@ -16,9 +17,16 @@ class Api::V1::MarketsController < Api::V1::BaseController
   end
   
   def show
-    @market = Market.find(params[:id])
+    #@market = Market.find(params[:id])
     respond_with(@market, :methods => "last_feature")
   end
   
-  
+  private
+    def find_market
+    @market = Market.for(current_user).find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      error = { :error => "The market you were looking for could not be found." }
+      respond_with(error, :status => 404)
+    end
+    
 end
