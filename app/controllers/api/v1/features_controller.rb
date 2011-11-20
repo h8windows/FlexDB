@@ -3,7 +3,7 @@ class Api::V1::FeaturesController < Api::V1::BaseController
   before_filter :find_market
   #before_filter :find_feature, :only => [:update]
   
-  respond_to :html, :xml, :json, :js
+  respond_to :xml, :json, :js
   
   def show
       @feature = Feature.find(params[:id])

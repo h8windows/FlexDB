@@ -3,8 +3,15 @@ class Api::V1::MarketsController < Api::V1::BaseController
   before_filter :authorize_admin!, :except => [:index, :show]
   before_filter :find_market, :only => [:show, :update]
   
+  respond_to :xml, :json, :js
+  
   def index
-    respond_with(Market.for(current_user))
+    #respond_with(Market.for(current_user))
+    @markets = Market.all
+    respond_with(@markets) do |format|
+      format.js {render :json => @markets, :include => [:features], :callback => params[:callback]}
+      format.xml { render :xml => @markets, :include => [:features]}
+    end
   end
   
   def create
@@ -17,8 +24,11 @@ class Api::V1::MarketsController < Api::V1::BaseController
   end
   
   def show
-    #@market = Market.find(params[:id])
-    respond_with(@market, :methods => "feature")
+    #respond_with(@market, :methods => "feature")
+        respond_with(@market) do |format|
+          format.js {render :json => @market, :include => [:features], :callback => params[:callback] }
+          format.xml { render :xml => @market, :include => [:features] }
+        end
   end
   
   def update
