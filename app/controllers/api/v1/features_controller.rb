@@ -5,6 +5,15 @@ class Api::V1::FeaturesController < Api::V1::BaseController
   
   respond_to :html, :xml, :json, :js
   
+  def show
+      @feature = Feature.find(params[:id])
+
+      respond_with(@feature) do |format|
+        format.js {render :json => @feature, :callback => params[:callback]}
+        format.xml { render :xml => @feature}
+      end
+    end
+  
   def index
     respond_with(@market.features) do |format|
       format.js {render :json => @market.features, :callback => params[:callback]}
