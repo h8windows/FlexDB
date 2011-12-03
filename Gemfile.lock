@@ -74,6 +74,8 @@ GEM
       multi_json (~> 1.0)
     factory_girl (2.2.0)
       activesupport
+    ferret (0.11.6)
+      rake (> 0.0.0)
     ffi (1.0.9)
     gherkin (2.6.2)
       json (>= 1.4.6)
@@ -185,6 +187,7 @@ DEPENDENCIES
   dynamic_form
   email_spec
   factory_girl
+  ferret
   jquery-rails
   json
   mysql2

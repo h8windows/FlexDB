@@ -3,7 +3,7 @@ class Api::V1::FeaturesController < Api::V1::BaseController
   before_filter :find_market
   #before_filter :find_feature, :only => [:update]
   
-  respond_to :xml, :json, :js
+  respond_to :xml, :json, :js, :html
   
   def show
       @feature = Feature.find(params[:id])
@@ -27,21 +27,6 @@ class Api::V1::FeaturesController < Api::V1::BaseController
       respond_with(feature, :location => api_v1_market_path(feature))
   end
   
-  def update
-    #@feature.update_attributes(params[:feature])
-    respond_with(@feature)
-    @feature = Feature.new(params[:feature])
-
-    respond_to do |format|
-      if @feature.save
-        format.js {render :json => @features}
-        format.xml { render :xml => @features}
-      else
-        format.js { render :json => @feature.errors, :status => :unprocessable_entity }
-        format.xml  { render :xml => @feature.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
   
   def update
       @feature = Feature.find(params[:id])
@@ -50,6 +35,7 @@ class Api::V1::FeaturesController < Api::V1::BaseController
         if @feature.update_attributes(params[:feature])
           format.js  { head :ok }
           format.xml  { head :ok }
+          format.html { head :ok }
         else
           format.js { render :json => @feature.errors, :status => :unprocessable_entity }
           format.xml  { render :xml => @feature.errors, :status => :unprocessable_entity }
