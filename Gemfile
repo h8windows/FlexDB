@@ -42,7 +42,6 @@ end
 
 gem 'devise', '~> 1.4.3'
 gem 'cancan', '1.6.5'
-gem 'ferret'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
