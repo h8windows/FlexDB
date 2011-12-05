@@ -9,7 +9,8 @@ class Api::V1::MarketsController < Api::V1::BaseController
     #respond_with(Market.for(current_user))
     @markets = Market.all
     respond_with(@markets) do |format|
-      format.js {render :json => @markets, :include => [:features], :callback => params[:callback]}
+      #format.js {render :json => @markets, :include => [:features], :callback => params[:callback]}
+      format.js {render :json => @markets, :callback => params[:callback]}
       format.xml { render :xml => @markets, :include => [:features]}
     end
   end
