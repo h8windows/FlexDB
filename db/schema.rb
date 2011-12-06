@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111117213534) do
+ActiveRecord::Schema.define(:version => 20111206184557) do
 
   create_table "features", :force => true do |t|
     t.string   "title"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(:version => 20111117213534) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "remoteId"
+    t.string   "remoteMarketId"
   end
 
   add_index "features", ["market_id"], :name => "index_features_on_market_id"
@@ -27,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20111117213534) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remoteId"
   end
 
   create_table "permissions", :force => true do |t|

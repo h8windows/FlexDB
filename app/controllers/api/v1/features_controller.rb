@@ -1,12 +1,12 @@
 class Api::V1::FeaturesController < Api::V1::BaseController
   
   before_filter :find_market
-  #before_filter :find_feature, :only => [:update]
+  before_filter :find_feature, :only => [:update]
   
   respond_to :xml, :json, :js, :html
   
   def show
-      @feature = Feature.find(params[:id])
+      @feature = Feature.find_by_remoteId(params[:id])
 
       respond_with(@feature) do |format|
         format.js {render :json => @feature, :callback => params[:callback]}
@@ -29,7 +29,7 @@ class Api::V1::FeaturesController < Api::V1::BaseController
   
   
   def update
-      @feature = Feature.find(params[:id])
+      @feature = Feature.find_by_remoteId(params[:id])
 
       respond_to do |format|
         if @feature.update_attributes(params[:feature])
@@ -45,14 +45,14 @@ class Api::V1::FeaturesController < Api::V1::BaseController
   
   private
     def find_market
-    @market = Market.for(current_user).find(params[:market_id])
+    @market = Market.for(current_user).find_by_remoteId(params[:market_id])
     rescue ActiveRecord::RecordNotFound
       error = { :error => "The market you were looking for could not be found." }
       respond_with(error, :status => 404)
     end
     
     def find_feature
-      @feature = @market.features.find(params[:id])
+      @feature = @market.features.find_by_remoteId(params[:id])
     end 
     
 end

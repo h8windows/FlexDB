@@ -39,7 +39,7 @@ class Api::V1::MarketsController < Api::V1::BaseController
   
   private
     def find_market
-    @market = Market.for(current_user).find(params[:id])
+    @market = Market.for(current_user).find_by_remoteId(params[:id])
     rescue ActiveRecord::RecordNotFound
       error = { :error => "The market you were looking for could not be found." }
       respond_with(error, :status => 404)
