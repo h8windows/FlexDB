@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111206184557) do
+ActiveRecord::Schema.define(:version => 20111210191204) do
 
   create_table "features", :force => true do |t|
     t.string   "title"
@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(:version => 20111206184557) do
     t.integer  "user_id"
     t.string   "remoteId"
     t.string   "remoteMarketId"
+    t.string   "asset_file_name"
+    t.string   "asset_content_type"
+    t.integer  "asset_file_size"
+    t.datetime "asset_updated_at"
   end
 
   add_index "features", ["market_id"], :name => "index_features_on_market_id"

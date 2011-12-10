@@ -1,32 +1,35 @@
-<%= form_for [@market, @feature] do |f| %>
-  <% if @feature.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@feature.errors.count, "error") %> prohibited this feature from being saved:</h2>
+<%= form_for [@market, @feature], :html => { :multipart => true } do |f| %>
+	<% if @feature.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@feature.errors.count, "error") %> prohibited this feature from being saved:</h2>
 
-      <ul>
-      <% @feature.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+		<ul>
+		<% @feature.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
 	<div class="field">
 		<%= f.label :title %>
-	    <%= f.text_field :title %>
-	  </div>
+		<%= f.text_field :title %>
+	</div>
 	<div class="field">
 		<%= f.label :remoteId %>
-	    <%= f.text_field :remoteId %>
-	  </div>
+		<%= f.text_field :remoteId %>
+	</div>
 	<div class="field">
 		<%= f.label :remoteMarketId %>
-	    <%= f.text_field :remoteMarketId %>
-	  </div>
+		<%= f.text_field :remoteMarketId %>
+	</div>
 	<div class="field">
 		<%= f.label :content %>
-	    <%= f.text_area :content %>
-	  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+		<%= f.text_area :content %>
+	</div>
+	<div class="field">
+		<%= f.label :asset, "File" %>
+		<%= f.file_field :asset %>
+	<div class="actions">
+		<%= f.submit %>
+	</div>
 <% end %>
