@@ -5,6 +5,7 @@ class Feature < ActiveRecord::Base
   validates :title, :presence => true
   validates :content, :presence => true, :length => { :minimum => 10 }
   
-  has_attached_file :asset
+  has_many :assets
+  accepts_nested_attributes_for :assets
   
 end

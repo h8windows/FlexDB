@@ -3,15 +3,17 @@
 	<small>Author: <%= @feature.user.name %></small>
 	<%= simple_format(@feature.content) %>
 	
-	<% if @feature.asset.exists? %>
+	<% if @feature.assets.exists? %>
 	<h3>Attached File</h3>
-	<div class="asset">
+	<div class="assets">
+		<% @feature.assets.each do |asset| %>
 		<p>
-			<%= link_to File.basename(@feature.asset.path), @feature.asset.url %>
+			<%= link_to File.basename(asset.asset.path), asset.asset.url %>
 		</p>
-		<p><small><%= number_to_human_size(@feature.asset.size)%>
-			(<%= @feature.asset.content_type %>)</small>
+		<p><small><%= number_to_human_size(asset.asset.size)%>
+			(<%= asset.asset.content_type %>)</small>
 		</p>
+		<% end %>
 	</div>
 	<% end %>
 </div>

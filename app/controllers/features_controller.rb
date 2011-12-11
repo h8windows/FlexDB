@@ -8,6 +8,7 @@ class FeaturesController < ApplicationController
   
   def new
     @feature = @market.features.build
+    3.times { @feature.assets.build }
   end
   
   def create
