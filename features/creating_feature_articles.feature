@@ -35,16 +35,15 @@ Feature: Creating feature articles
 		Then I should see "Feature article has not been created."
 		And I should see "Content is too short"
 		
+	@javascript
 	Scenario: Creating a feature article with an attachment
 		When I fill in "Title" with "Dining Alfresco"
 		And I fill in "Content" with "Patios are the best places to eat"
 		And I attach the file "spec/fixtures/speed.txt" to "File #1"
+		And I follow "Add another file"
 		And I attach the file "spec/fixtures/spin.txt" to "File #2"
-		And I attach the file "spec/fixtures/flip.txt" to "File #3"
 		And I press "Create Feature"
 		Then I should see "Feature article has been created."
 		And I should see "speed.txt" within "#feature .assets"
 		And I should see "spin.txt" within "#feature .assets"
-		And I should see "flip.txt" within "#feature .assets"
-		
 		

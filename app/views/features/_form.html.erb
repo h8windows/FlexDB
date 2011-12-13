@@ -26,14 +26,41 @@
 		<%= f.label :content %>
 		<%= f.text_area :content %>
 	</div>
-	<div class="field">
-		<% number = 0 %>
-		<%= f.fields_for :assets do |asset| %>
-		<p>
-			<%= asset.label :asset, "File ##{number += 1}" %>
-			<%= asset.file_field :asset %>
-		</p>
+	<div class="field" id="files">
+		<% if @feature.assets.exists? %>
+			<!% number = @feature.assets.count %>
+			<% number = 0 %>
+			<div class="assets">
+				<% @feature.assets.each do |asset| %>
+					<p>
+						<%= image_tag(asset.asset.url) %> <!%= link_to File.basename(asset.asset.path), asset.asset.url %>
+						<br />
+						<%= link_to 'Delete image', 
+							{ :controller => 'files', :action => 'destroy', :id => asset.id },
+							{ :confirm => 'Are you sure?', :method => :delete}
+						%>
+					</p>
+				<% end %>
+			</div>
+				<%= f.fields_for :assets, :child_index => number do |asset| %>
+					<p>
+						<% if @feature.assets.empty? %>
+							<%= asset.label :asset, "File ##{number += 1}" %>
+							<%= asset.file_field :asset %>
+						<% end %>
+					</p>
+				<% end %>
+		<% else %>
+			<% number = 0 %>
+			<%= f.fields_for :assets, :child_index => number do |asset| %>
+				<p>
+					<%= asset.label :asset, "File ##{number += 1}" %>
+					<%= asset.file_field :asset %>
+				</p>
+			<% end %>
 		<% end %>
+	</div>
+	<%= link_to "Add another image", 'javascript:', :id => "add_another_file" %>
 	<div class="actions">
 		<%= f.submit %>
 	</div>

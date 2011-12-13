@@ -4,16 +4,18 @@
 	<%= simple_format(@feature.content) %>
 	
 	<% if @feature.assets.exists? %>
-	<h3>Attached File</h3>
+	<% total = @feature.assets.count %>
+	<h3><%= pluralize(total, 'image') %> attached</h3>
 	<div class="assets">
 		<% @feature.assets.each do |asset| %>
 		<p>
-			<%= link_to File.basename(asset.asset.path), asset.asset.url %>
-		</p>
-		<p><small><%= number_to_human_size(asset.asset.size)%>
+			<%= image_tag(asset.asset.url) %>
+			<br />
+			<small><%= number_to_human_size(asset.asset.size)%>
 			(<%= asset.asset.content_type %>)</small>
 		</p>
 		<% end %>
+		
 	</div>
 	<% end %>
 </div>

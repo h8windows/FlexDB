@@ -8,7 +8,7 @@ class FeaturesController < ApplicationController
   
   def new
     @feature = @market.features.build
-    3.times { @feature.assets.build }
+    @feature.assets.build
   end
   
   def create
@@ -27,7 +27,9 @@ class FeaturesController < ApplicationController
   end
   
   def edit
-    
+    if @feature.assets.blank?
+      @feature.assets.build
+    end
   end
   
   def update
@@ -39,6 +41,7 @@ class FeaturesController < ApplicationController
       render :action => "edit"
     end
   end
+  
   
   def destroy
     @feature.destroy
@@ -56,6 +59,7 @@ class FeaturesController < ApplicationController
     
     def find_feature
       @feature = @market.features.find(params[:id])
+      
     end
     
     def authorize_create!
