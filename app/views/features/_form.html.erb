@@ -14,18 +14,17 @@
 		<%= f.label :title %>
 		<%= f.text_field :title %>
 	</div>
-	<div class="field">
-		<%= f.label :remoteId %>
-		<%= f.text_field :remoteId %>
-	</div>
-	<div class="field">
-		<%= f.label :remoteMarketId %>
-		<%= f.text_field :remoteMarketId %>
-	</div>
-	<div class="field">
+	<div>
+		<script type="text/javascript">
+		  tinyMCE.init({
+		    mode: 'textareas',
+		    theme: 'advanced'
+		  });
+		</script>
 		<%= f.label :content %>
 		<%= f.text_area :content %>
 	</div>
+	<br />
 	<div class="field" id="files">
 		<% if @feature.assets.exists? %>
 			<!% number = @feature.assets.count %>
